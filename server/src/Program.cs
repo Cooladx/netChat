@@ -34,15 +34,3 @@ app.MapHub<ChatHub>("/hub");
 // Starts application and only stops till it's shut down manually.
 app.Run();
 
-// builder.Services.ConfigureHttpJsonOptions(options =>
-// {
-//     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
-// });
-
-// public record Todo(int Id, string? Title, DateOnly? DueBy = null, bool IsComplete = false);
-
-// [JsonSerializable(typeof(Todo[]))]
-// internal partial class AppJsonSerializerContext : JsonSerializerContext
-// {
-
-// }
