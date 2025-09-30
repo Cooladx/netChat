@@ -11,7 +11,17 @@ var builder = WebApplication.CreateSlimBuilder(args);
 builder.Services.AddSignalR();
 
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5019")
+                .AllowAnyHeader()
+                .WithMethods("GET", "POST")
+                .AllowCredentials();
+        });
+});
 // Builds web app
 var app = builder.Build();
 
@@ -26,6 +36,10 @@ var webSocketOptions = new WebSocketOptions
 };
 
 app.UseWebSockets(webSocketOptions);
+
+
+// UseCors must be called before MapHub.
+app.UseCors();
 
 // Links url with endpoint hub for websocket.
 app.MapHub<ChatHub>("/hub");
