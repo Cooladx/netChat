@@ -1,5 +1,5 @@
-./idea
-./obj
-./bin
+/idea
+/obj
+/bin
 netChat.sln
-./vscode
+vscode
