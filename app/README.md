@@ -1,9 +1,7 @@
 # net-chat-ui
 
+The user interface of the project.
 
-The user interface of the project. 
-
-To install, use 
+To install, use
 
 `npm install`
-
