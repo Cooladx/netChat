@@ -16,9 +16,9 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         builder =>
         {
-            builder.WithOrigins("http://localhost:5019")
+            builder.WithOrigins("http://localhost:5173")
                 .AllowAnyHeader()
-                .WithMethods("GET", "POST")
+                .AllowAnyMethod()
                 .AllowCredentials();
         });
 });
@@ -28,6 +28,7 @@ var app = builder.Build();
 // Allows server to locate and serve index.html
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
 
 
 var webSocketOptions = new WebSocketOptions
@@ -40,6 +41,7 @@ app.UseWebSockets(webSocketOptions);
 
 // UseCors must be called before MapHub.
 app.UseCors();
+
 
 // Links url with endpoint hub for websocket.
 app.MapHub<ChatHub>("/hub");
