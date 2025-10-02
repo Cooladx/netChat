@@ -20,8 +20,6 @@ export default function Button() {
     await start();
   });
 
-  // Start the connection.
-  // start();
   return (
     <>
       <button type="button" onClick={start}>
