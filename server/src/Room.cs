@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 class Room
 {
@@ -30,9 +31,11 @@ class Room
     //Constructor
     public Room()
     {
+        //Generate room code
+        generateRoomCode();
+
         //ask for room creator to input username at this point
-        //Console.WriteLine("Enter your username. >");
-        //string input = Console.ReadLine();
+        
         User creator = new User( /*use input username as argument*/ );
         startup(creator);
     }
@@ -77,5 +80,24 @@ class Room
         //Need to ensure that multiple messages being sent at once won't overshadow each other
         //Primitive implementation
         Console.WriteLine(messages.Dequeue());
+    }
+
+    private void generateRoomCode()
+    {
+        //Generate a random 6 letter code
+        string random = RandomNumberGenerator.GetString(
+            choices: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+            length: 8
+        );
+
+        //Check if it already exists
+        if ( false /*Check if room code already exists in list of room codes*/)
+        {
+            generateRoomCode();
+        }
+        else
+        {
+            room_code = random;
+        }
     }
 }
