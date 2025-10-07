@@ -1,0 +1,10 @@
+.msg-box {
+  display: flex;
+  margin-top: 2rem;
+  background-color: white;
+}
+
+.messageTitle {
+  color: black;
+  margin: 1rem;
+}
