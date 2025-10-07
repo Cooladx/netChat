@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using Microsoft.Extensions.WebEncoders.Testing;
+// using Microsoft.Extensions.WebEncoders.Testing;
 
 using Microsoft.AspNetCore.SignalR;
 using SignalRWebpack.Hubs;
@@ -31,12 +31,12 @@ app.UseStaticFiles();
 
 
 
-var webSocketOptions = new WebSocketOptions
-{
-    KeepAliveInterval = TimeSpan.FromMinutes(2)
-};
+// var webSocketOptions = new WebSocketOptions
+// {
+//     KeepAliveInterval = TimeSpan.FromMinutes(2)
+// };
 
-app.UseWebSockets(webSocketOptions);
+// app.UseWebSockets(webSocketOptions);
 
 
 // UseCors must be called before MapHub.
