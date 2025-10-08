@@ -1,6 +1,6 @@
 import * as signalR from "@microsoft/signalr";
 import { HubConnection } from "@microsoft/signalr";
-import "./style.css"
+import "./style.css";
 /* 
   Function to create logic for client to make connection to websocket.
   If client has no connection when clicking on button, they will be granted a signalR hub connection. 

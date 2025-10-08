@@ -1,8 +1,8 @@
-import "./style.css"
+import "./style.css";
 export default function Header() {
-    return (
-        <>
-        <h1>Net Chat</h1>
-        </>
-    )
+  return (
+    <>
+      <h1>Net Chat</h1>
+    </>
+  );
 }

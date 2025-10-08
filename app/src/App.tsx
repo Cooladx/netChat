@@ -9,13 +9,11 @@ import Input from "./components/inputBox/input.tsx";
 import MessageButton from "./components/submitMessageButton/messageButton.tsx";
 import MessageBox from "./components/messageBox/messageBox.tsx";
 
-
 /*
 Parent component to take all children components under it to build the html and js logic.
 Will also maintain the state and pass as props to the children components. 
 */
 function App() {
-  
   /* App manages connection, username, and message state for these children components under app. */
   const [connection, setConnection] = useState<HubConnection | null>(null);
   const [username, setUsername] = useState<string>("");
