@@ -1,5 +1,6 @@
 .msg-box {
   display: flex;
+  flex-direction: column;
   margin-top: 2rem;
   background-color: white;
 }
@@ -7,4 +8,14 @@
 .messageTitle {
   color: black;
   margin: 1rem;
+}
+
+.msg-list {
+  display: block;
+  color: black;
+}
+
+.msg-element {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
 }
