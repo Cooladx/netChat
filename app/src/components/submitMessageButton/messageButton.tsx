@@ -1,6 +1,8 @@
 import "./style.css";
-import * as signalR from "@microsoft/signalr";
 import { HubConnection } from "@microsoft/signalr";
+
+/* Function to create a button that will send message from a user to the dotnet server. 
+Client needs existing connection or this will not work. server will recieve that message and run method SendMessage.*/
 export default function MessageButton({
   buttonText,
   id,
@@ -14,14 +16,14 @@ export default function MessageButton({
   username: string;
   message: string;
 }) {
+  // Function to run when client clicks send message button.
+  // it will run a method from the hubs class in the asp.net core backend.
+  // The server will return a promise upon completing this request from the client.
   async function handleClick() {
-    // console.log(username);
-    // console.log(message);
     try {
       if (connection != null) {
-        console.log(connection.state);
-        console.log(connection);
-        // await connection.invoke("SendMessage", username, message);
+        console.log("Sending to server:", username, message);
+        await connection.invoke("SendMessage", username, message);
       }
     } catch (err) {
       console.error(err);
@@ -30,7 +32,7 @@ export default function MessageButton({
 
   return (
     <>
-      <button type="button" id={id} onClick={handleClick}>
+      <button type="button" id={id} onClick={handleClick} className="msg-btn">
         {buttonText}
       </button>
     </>
