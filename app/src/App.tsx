@@ -1,19 +1,30 @@
 import { useState } from "react";
 import "./App.css";
-import * as signalR from "@microsoft/signalr";
 import { HubConnection } from "@microsoft/signalr";
-import Button from "./components/websocketButton";
-import Input from "./components/inputBox";
-import MessageButton from "./components/submitMessageButton";
-import MessageBox from "./components/messageBox";
+
+// Components to build app.
+import Header from "./components/header/header.tsx";
+import SocketButton from "./components/websocketButton/socketButton.tsx";
+import Input from "./components/inputBox/input.tsx";
+import MessageButton from "./components/submitMessageButton/messageButton.tsx";
+import MessageBox from "./components/messageBox/messageBox.tsx";
+
+
+/*
+Parent component to take all children components under it to build the html and js logic.
+Will also maintain the state and pass as props to the children components. 
+*/
 function App() {
+  
+  /* App manages connection, username, and message state for these children components under app. */
   const [connection, setConnection] = useState<HubConnection | null>(null);
   const [username, setUsername] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   return (
     <>
+      <Header />
       <div>
-        <Button connection={connection} setConnection={setConnection} />
+        <SocketButton connection={connection} setConnection={setConnection} />
         <div>
           <Input
             placeholder={"Enter user"}
