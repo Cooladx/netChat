@@ -38,8 +38,8 @@ class Room
 
         //ask for room creator to input username at this point
         
-        User creator = new User( /*use input username as argument*/ );
-        startup(creator);
+        //User creator = new User( /*use input username as argument*/ );
+        //startup(creator);
     }
 
     //Called when room is created
