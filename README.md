@@ -23,6 +23,10 @@ It should be noted that leads will work on files within their respective branche
 
 - Npm  
 - Node
+- Dotnet
+- Vite
+- ESlint
+- Prettier
 
 
 
