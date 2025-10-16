@@ -2,10 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import * as signalR from "@microsoft/signalr";
 import { HubConnection } from "@microsoft/signalr";
-import Button from "./components/websocketButton";
-import Input from "./components/inputBox";
-import MessageButton from "./components/submitMessageButton";
-import MessageBox from "./components/messageBox";
+import Button from "./components/websocketButton/button.tsx";
+import Input from "./components/inputBox/input.tsx";
+import MessageButton from "./components/submitMessageButton/messageButton.tsx";
+import MessageBox from "./components/messageBox/messageBox.tsx";
 function App() {
   const [connection, setConnection] = useState<HubConnection | null>(null);
   const [username, setUsername] = useState<string>("");
