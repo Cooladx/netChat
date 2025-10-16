@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
+namespace server.src;
+
 class Room
 {
     //Variables

@@ -1,5 +1,7 @@
 using System;
 
+namespace server.src;
+
 class User
 {
     //Variables
