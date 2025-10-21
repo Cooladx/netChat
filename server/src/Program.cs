@@ -1,14 +1,24 @@
-using System.Text.Json.Serialization;
-using Microsoft.Extensions.WebEncoders.Testing;
 
-using Microsoft.AspNetCore.SignalR;
+
 using SignalRWebpack.Hubs;
+
 
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
+// debugging for terminal.
+ builder.Logging.SetMinimumLevel(LogLevel.Debug); 
 
-builder.Services.AddSignalR();
+// Add debugging for SignalR and json serialization.
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+}).AddJsonProtocol(options =>
+{
+    options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+    options.PayloadSerializerOptions.TypeInfoResolver = new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver();
+
+});
 
 
 builder.Services.AddCors(options =>
@@ -22,6 +32,9 @@ builder.Services.AddCors(options =>
                 .AllowCredentials();
         });
 });
+
+
+
 // Builds web app
 var app = builder.Build();
 
@@ -30,13 +43,6 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 
-
-var webSocketOptions = new WebSocketOptions
-{
-    KeepAliveInterval = TimeSpan.FromMinutes(2)
-};
-
-app.UseWebSockets(webSocketOptions);
 
 
 // UseCors must be called before MapHub.
