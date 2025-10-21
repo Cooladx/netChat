@@ -43,13 +43,13 @@ class Room
     }
 
     //Called when room is created
-    void startup(User user)
+    public void startup(User user)
     {
         addUser(user);
     }
 
     //Called when room is unneeded (when 0 users remain?)
-    void shutdown()
+    public void shutdown()
     {
 
     }
