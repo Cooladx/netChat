@@ -1,13 +1,10 @@
-
-
-using SignalRWebpack.Hubs;
-
-
+using System.Text.Json.Serialization;
+using netChat.Hubs;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
 // debugging for terminal.
- builder.Logging.SetMinimumLevel(LogLevel.Debug); 
+builder.Logging.SetMinimumLevel(LogLevel.Debug); 
 
 // Add debugging for SignalR and json serialization.
 builder.Services.AddSignalR(options =>
@@ -16,8 +13,7 @@ builder.Services.AddSignalR(options =>
 }).AddJsonProtocol(options =>
 {
     options.PayloadSerializerOptions.PropertyNamingPolicy = null;
-    options.PayloadSerializerOptions.TypeInfoResolver = new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver();
-
+    options.PayloadSerializerOptions.TypeInfoResolver = new netChat.NetChatContext();
 });
 
 
@@ -34,7 +30,6 @@ builder.Services.AddCors(options =>
 });
 
 
-
 // Builds web app
 var app = builder.Build();
 
@@ -42,13 +37,10 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-
-
-
 // UseCors must be called before MapHub.
 app.UseCors();
 
-
+app.MapControllers();
 // Links url with endpoint hub for websocket.
 app.MapHub<ChatHub>("/hub");
 
@@ -56,3 +48,13 @@ app.MapHub<ChatHub>("/hub");
 // Starts application and only stops till it's shut down manually.
 app.Run();
 
+namespace netChat
+{
+    [JsonSerializable(typeof(string))]
+    [JsonSerializable(typeof(float))]
+    [JsonSerializable(typeof(double))]
+    [JsonSerializable(typeof(long))]
+    [JsonSerializable(typeof(int))]
+    [JsonSerializable(typeof(bool))]
+    public partial class NetChatContext : JsonSerializerContext { }
+}
