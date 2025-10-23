@@ -1,0 +1,103 @@
+{
+
+  "openapi": "3.0.0",
+  "info": {
+    "title": "netChat",
+    "description": "netChat",
+    "version": "1.0.0"
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "properties": {
+          "Error": {
+            "description": "Not found error message",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "InvalidCredentialsError": {
+        "description": "Error message for invalid credentials",
+        "type": "string"
+      },
+      "Message": {
+        "properties": {
+          "author": {
+            "description":  "The author of the message",
+            "type": "string"
+          },
+          "text": {
+            "description": "The text contents of the message",
+            "type": "string"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-09-18T14:49:00Z",
+            "description": "Time the message was sent"
+          }
+          
+        },
+        "type": "object"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https"
+    }
+  ],
+  "paths": {
+    "/get_messages/{count}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Get a number of messages, starting from latest",
+            "in": "path",
+            "name": "count",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+            "401": {
+              "description": "Invalid Username",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/InvalidCredentialsError"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Number of messages were not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "200": {
+             "description": "Array of messages, starting from latest",
+             "content": {
+                 "application/json": {
+                 "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+           }
+              }
+            }
+          }
+        }
+      }
+    }
+}
