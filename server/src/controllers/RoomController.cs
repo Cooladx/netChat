@@ -9,7 +9,7 @@ public class RoomController : ControllerBase
 {
     private static List<Room> rooms = new List<Room>();
 
-    [HttpPost]
+    [HttpPost("{username}")]
     private IActionResult CreateRoom(string username)
     {
         User creator = new User(username);
