@@ -26,14 +26,11 @@ It should be noted that leads will work on files within their respective branche
 
 - Npm  
 - Node
-<<<<<<< HEAD
 - Dotnet
 - Vite
 - ESlint
 - Prettier
-=======
 - Open A.P.I
->>>>>>> 1a1514be8045e3ff2e13637f33dbd2a0a4ae6683
 
 
 

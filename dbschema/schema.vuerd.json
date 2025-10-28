@@ -4,8 +4,8 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -142.9765,
-    "scrollLeft": -173.2821,
+    "scrollTop": 0,
+    "scrollLeft": 0,
     "zoomLevel": 1,
     "show": 431,
     "database": 4,
@@ -44,29 +44,6 @@
   },
   "collections": {
     "tableEntities": {
-      "xQcssDjMKWZgv_WWbDKka": {
-        "id": "xQcssDjMKWZgv_WWbDKka",
-        "name": "",
-        "comment": "",
-        "columnIds": [
-          "8ZVtozD2xTSS1bZDJz6ia"
-        ],
-        "seqColumnIds": [
-          "8ZVtozD2xTSS1bZDJz6ia"
-        ],
-        "ui": {
-          "x": 200,
-          "y": 100,
-          "zIndex": 2,
-          "widthName": 60,
-          "widthComment": 60,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1759241802309,
-          "createAt": 1759241796953
-        }
-      },
       "WGeGNqlFJV7g_QEWoL_Z6": {
         "id": "WGeGNqlFJV7g_QEWoL_Z6",
         "name": "UsersKey",
@@ -103,35 +80,6 @@
         "meta": {
           "updateAt": 1759255056247,
           "createAt": 1759241810230
-        }
-      },
-      "MFA-HNeQJ3SSo7Q5g3Qzz": {
-        "id": "MFA-HNeQJ3SSo7Q5g3Qzz",
-        "name": "Chatroom",
-        "comment": "Information for chatroom",
-        "columnIds": [
-          "c5Pz_pKb3kn5EYsIYXtw9",
-          "pnvkJZbw-PcQy9y6RfBui",
-          "DlOrODl-Sq32UVMWrsOBp"
-        ],
-        "seqColumnIds": [
-          "c5Pz_pKb3kn5EYsIYXtw9",
-          "spE1202AklWeFhRbCY4LZ",
-          "pnvkJZbw-PcQy9y6RfBui",
-          "g6IF5110nLS35Eg9SFiKR",
-          "DlOrODl-Sq32UVMWrsOBp"
-        ],
-        "ui": {
-          "x": 513.558,
-          "y": 25.3333,
-          "zIndex": 54,
-          "widthName": 60,
-          "widthComment": 137,
-          "color": ""
-        },
-        "meta": {
-          "updateAt": 1759242265512,
-          "createAt": 1759242095990
         }
       },
       "bBCgmaiNn1NhCsLOsN4Pu": {
@@ -193,26 +141,6 @@
       }
     },
     "tableColumnEntities": {
-      "8ZVtozD2xTSS1bZDJz6ia": {
-        "id": "8ZVtozD2xTSS1bZDJz6ia",
-        "tableId": "xQcssDjMKWZgv_WWbDKka",
-        "name": "",
-        "comment": "",
-        "dataType": "",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1759241802309,
-          "createAt": 1759241802309
-        }
-      },
       "GjJIFQP7hl-sr2eZp3YJA": {
         "id": "GjJIFQP7hl-sr2eZp3YJA",
         "tableId": "WGeGNqlFJV7g_QEWoL_Z6",
@@ -273,46 +201,6 @@
           "createAt": 1759242061791
         }
       },
-      "c5Pz_pKb3kn5EYsIYXtw9": {
-        "id": "c5Pz_pKb3kn5EYsIYXtw9",
-        "tableId": "MFA-HNeQJ3SSo7Q5g3Qzz",
-        "name": "Uname",
-        "comment": "",
-        "dataType": "VARCHAR",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1759242154635,
-          "createAt": 1759242144206
-        }
-      },
-      "spE1202AklWeFhRbCY4LZ": {
-        "id": "spE1202AklWeFhRbCY4LZ",
-        "tableId": "MFA-HNeQJ3SSo7Q5g3Qzz",
-        "name": "",
-        "comment": "",
-        "dataType": "",
-        "default": "",
-        "options": 10,
-        "ui": {
-          "keys": 1,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1759242176605,
-          "createAt": 1759242176604
-        }
-      },
       "7xgHjj_ENVKJeoz08Qmk5": {
         "id": "7xgHjj_ENVKJeoz08Qmk5",
         "tableId": "WGeGNqlFJV7g_QEWoL_Z6",
@@ -331,66 +219,6 @@
         "meta": {
           "updateAt": 1759242178753,
           "createAt": 1759242178753
-        }
-      },
-      "pnvkJZbw-PcQy9y6RfBui": {
-        "id": "pnvkJZbw-PcQy9y6RfBui",
-        "tableId": "MFA-HNeQJ3SSo7Q5g3Qzz",
-        "name": "RoomID",
-        "comment": "",
-        "dataType": "INT",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1759242225793,
-          "createAt": 1759242215391
-        }
-      },
-      "g6IF5110nLS35Eg9SFiKR": {
-        "id": "g6IF5110nLS35Eg9SFiKR",
-        "tableId": "MFA-HNeQJ3SSo7Q5g3Qzz",
-        "name": "",
-        "comment": "",
-        "dataType": "",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1759242229340,
-          "createAt": 1759242229340
-        }
-      },
-      "DlOrODl-Sq32UVMWrsOBp": {
-        "id": "DlOrODl-Sq32UVMWrsOBp",
-        "tableId": "MFA-HNeQJ3SSo7Q5g3Qzz",
-        "name": "MessageID",
-        "comment": "",
-        "dataType": "VARCHAR",
-        "default": "",
-        "options": 0,
-        "ui": {
-          "keys": 0,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 60,
-          "widthDefault": 60
-        },
-        "meta": {
-          "updateAt": 1759242285736,
-          "createAt": 1759242265512
         }
       },
       "GtNl660EQTXtTMeXaOmyf": {
@@ -695,34 +523,6 @@
       }
     },
     "relationshipEntities": {
-      "8zGbRodgYODpuD2jAowZb": {
-        "id": "8zGbRodgYODpuD2jAowZb",
-        "identification": false,
-        "relationshipType": 8,
-        "startRelationshipType": 2,
-        "start": {
-          "tableId": "MFA-HNeQJ3SSo7Q5g3Qzz",
-          "columnIds": [
-            "spE1202AklWeFhRbCY4LZ"
-          ],
-          "x": 577.558,
-          "y": 109.33330000000001,
-          "direction": 1
-        },
-        "end": {
-          "tableId": "WGeGNqlFJV7g_QEWoL_Z6",
-          "columnIds": [
-            "7xgHjj_ENVKJeoz08Qmk5"
-          ],
-          "x": 456,
-          "y": 101,
-          "direction": 2
-        },
-        "meta": {
-          "updateAt": 1759242178753,
-          "createAt": 1759242178753
-        }
-      },
       "nhS3-RlTrmld7tqzl2gkR": {
         "id": "nhS3-RlTrmld7tqzl2gkR",
         "identification": false,
