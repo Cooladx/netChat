@@ -21,7 +21,7 @@ builder.Services.AddSignalR(options =>
 // Sets up our connection to the database
 var sql_client_builder = new NpgsqlConnectionStringBuilder
 {
-    Host = "localhost:5432",
+    Host = "127.0.0.1:5432",
     Username = "postgres",
     Password = "<password>",
     Database = "netChatDB"
@@ -34,7 +34,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         builder =>
         {
-            builder.WithOrigins("http://localhost:5173")
+            builder.WithOrigins("http://127.0.0.1:5173")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
@@ -50,8 +50,6 @@ app.UseStaticFiles();
 
 // UseCors must be called before MapHub.
 app.UseCors();
-
-app.MapControllers();
 // Links url with endpoint hub for websocket.
 app.MapHub<netChat.Hubs.ChatHub>("/hub");
 
@@ -69,7 +67,19 @@ namespace netChat
     [JsonSerializable(typeof(bool))]
     public partial class NetChatContext : JsonSerializerContext { }
 
-    public class NetChatDBContext : DbContext
+    public class NetChatDBContext(DbContextOptions options) : DbContext(options)
     {
+        public DbSet<User> Users { get; set; }
+    }
+    
+    public class User(string UserId)
+    {
+        public User(string UserId, string Username): this(UserId)
+        {
+            this.Username = Username;
+        }
+
+        public required string UserID { get; set; } = UserId;
+        public string? Username { get; set; }
     }
 }
