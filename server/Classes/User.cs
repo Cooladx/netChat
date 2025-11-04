@@ -1,5 +1,7 @@
 using System;
 
+namespace netChat.Classes;
+
 class User
 {
     //Variables
@@ -18,10 +20,10 @@ class User
     }
 
     //Constructor
-    public User() {}
-    
+    public User() { }
+
     //Constructor with username parameters
-    public User(string username) 
+    public User(string username)
     {
         this.username = username;
     }

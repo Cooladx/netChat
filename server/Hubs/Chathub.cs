@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.SignalR;
 
-namespace SignalRWebpack.Hubs;
+namespace netChat.Hubs;
 
 public class ChatHub : Hub
 {
@@ -11,7 +11,4 @@ public class ChatHub : Hub
 
 
     }
-         
-      
-
 }
