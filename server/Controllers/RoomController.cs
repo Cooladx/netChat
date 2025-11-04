@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using server.src;
+using netChat.Classes;
 
-namespace server.src.controllers;
+namespace netChat.Controllers;
 
 [ApiController]
 [Route("[controller]")]
