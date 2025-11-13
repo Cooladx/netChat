@@ -13,8 +13,11 @@ The GitHub repository consists of a series of branches for organization:
 - Main  
 - Frontend  
 - Backend  
-- Frontend/ Feature  
-- Backend/ Feature
+- Frontend
+- Backend
+- Backend- combined
+- Backend- custom_classes
+- Schema
  
 
 It should be noted that leads will work on files within their respective branches, and communicate the completion of a file. The main branch of the repository will act as the "finished product" and the progress of our spikes. Also the repository should only allow files that adhere to the compliance of the software architecture.
@@ -27,6 +30,7 @@ It should be noted that leads will work on files within their respective branche
 - Vite
 - ESlint
 - Prettier
+- Open A.P.I
 
 
 
