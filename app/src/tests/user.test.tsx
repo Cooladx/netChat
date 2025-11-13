@@ -4,9 +4,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import RoomSidebar from "../components/sidebar/roomSidebar";
 import UserSidebar from "../components/sidebar/userSidebar";
 
-
-
-
 // Function to get the rooms and the users within these rooms
 function RoomWithUsers({ rooms, usersMap }: any) {
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
@@ -20,8 +17,6 @@ function RoomWithUsers({ rooms, usersMap }: any) {
     </div>
   );
 }
-
-
 // Tests the Room with Users to display 
 test("fireEvent: clicking a room shows users", () => {
   const rooms = [
