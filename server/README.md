@@ -1,14 +1,32 @@
+# netChat
+## **Technical Architecture**
 
+- Frontend - React / Typescript   
+- Backend - C# framework with ASP.net
+
+
+
+## **Organizational Schema**
+
+The GitHub repository consists of a series of branches for organization:
+
+- Main  
+- Frontend  
+- Backend  
+- Frontend/ Feature  
+- Backend/ Feature
  
-# Backend - C# framework with ASP.net
 
-Be sure to have .NET 9 SDK installed or your server won't be able to run correctly.
+It should be noted that leads will work on files within their respective branches, and communicate the completion of a file. The main branch of the repository will act as the "finished product" and the progress of our spikes. Also the repository should only allow files that adhere to the compliance of the software architecture.
 
- ## To run backend server
-1. Be in server directory. 
-2. Run `dotnet run` to start the server.
+## **Other Tools Utilized**
+
+- Npm  
+- Node
+- Dotnet
+- Vite
+- ESlint
+- Prettier
 
 
-The backend uses ASP.NET Core to support the frontend client using React. 
 
-It uses a library: SignalR for real-time communication  to deliver these messages back to the client.
