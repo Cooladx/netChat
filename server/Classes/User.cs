@@ -19,6 +19,13 @@ class User
         set { username = value; }
     }
 
+    private string password = "";
+    public string Password
+    {
+        get { return password; }
+        set { password = value; }
+    }
+
     //Constructor
     public User() { }
 

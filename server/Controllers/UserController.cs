@@ -10,19 +10,25 @@ public class UserController : ControllerBase
     private static List<User> users = new List<User>();
 
     [HttpPost]
-    private IActionResult AddUser(User user)
+    private IActionResult AddUser(string username, string password)
     {
-        users.Add(user);
-        return CreatedAtAction("placeholder", new { code = user.userName }, user);
+        User newUser = new User(username);
+        newUser.Password = password;
+        users.Add(newUser);
+        return CreatedAtAction("placeholder", new { code = newUser.userName }, newUser);
     }
 
     [HttpDelete("{username}")]
-    private IActionResult GetRoom(string username)
+    private IActionResult GetRoom(string username, string password)
     {
         User? user = users.FirstOrDefault(u => u.userName == username);
         if (user == null)
         {
             return NotFound();
+        }
+        if (user.Password != password)
+        {
+            return Unauthorized();
         }
         users.Remove(user);
         return NoContent();
@@ -39,12 +45,16 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("{username}")]
-    private IActionResult GetUser(string username)
+    private IActionResult GetUser(string username, string password)
     {
         User? user = users.FirstOrDefault(u => u.userName == username);
         if (user == null)
         {
             return NotFound();
+        }
+        if (user.Password != password)
+        {
+            return Unauthorized();
         }
         return Ok(user);
     }
