@@ -1,10 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { HubConnection } from "@microsoft/signalr";
-
-// Components to build app.
-import Header from "./components/header/header.tsx";
-import SocketButton from "./components/websocketButton/socketButton.tsx";
+import Button from "./components/websocketButton/button.tsx";
 import Input from "./components/inputBox/input.tsx";
 import MessageButton from "./components/submitMessageButton/messageButton.tsx";
 import MessageBox from "./components/messageBox/messageBox.tsx";
