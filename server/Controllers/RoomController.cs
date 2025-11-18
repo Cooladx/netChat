@@ -10,7 +10,7 @@ public class RoomController : ControllerBase
     private static List<Room> rooms = new List<Room>();
 
     [HttpPost("{username}")]
-    private IActionResult CreateRoom(string username)
+    public IActionResult CreateRoom(string username)
     {
         User creator = new User(username);
         Room newRoom = new Room();
@@ -20,7 +20,7 @@ public class RoomController : ControllerBase
     }
 
     [HttpDelete("{code}")]
-    private IActionResult DeleteRoom(string code)
+    public IActionResult DeleteRoom(string code)
     {
         Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
         if (room == null)
@@ -33,7 +33,7 @@ public class RoomController : ControllerBase
     }
 
     [HttpGet]
-    private IActionResult GetRooms()
+    public IActionResult GetRooms()
     {
         foreach (var room in rooms)
         {
@@ -43,7 +43,7 @@ public class RoomController : ControllerBase
     }
 
     [HttpGet("{code}")]
-    private IActionResult GetRoom(string code)
+    public IActionResult GetRoom(string code)
     {
         Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
         if (room == null)

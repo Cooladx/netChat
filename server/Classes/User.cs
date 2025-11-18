@@ -2,29 +2,12 @@ using System;
 
 namespace netChat.Classes;
 
-class User
+public class User
 {
     //Variables
-    private int user_id = -1;
-    public int userID
-    {
-        get { return user_id; }
-        set { user_id = value; }
-    }
-
-    private string username = "User";
-    public string userName
-    {
-        get { return username; }
-        set { username = value; }
-    }
-
-    private string password = "";
-    public string Password
-    {
-        get { return password; }
-        set { password = value; }
-    }
+    public int userID { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
 
     //Constructor
     public User() { }
@@ -32,14 +15,14 @@ class User
     //Constructor with username parameters
     public User(string username)
     {
-        this.username = username;
+        Username = username;
+        userID = -1;
     }
 
     //Constructor with user_id and username parameters
-    public User(int user_id, string username)
+    public User(string username, int user_id)
     {
-        this.user_id = user_id;
-        this.username = username;
+        userID = user_id;
+        Username = username;
     }
-
 }

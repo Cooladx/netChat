@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using netChat;
 using Npgsql;
+using netChat.Classes;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
@@ -69,17 +70,6 @@ namespace netChat
 
     public class NetChatDBContext(DbContextOptions options) : DbContext(options)
     {
-        public DbSet<User> Users { get; set; }
-    }
-    
-    public class User(string UserId)
-    {
-        public User(string UserId, string Username): this(UserId)
-        {
-            this.Username = Username;
-        }
-
-        public required string UserID { get; set; } = UserId;
-        public string? Username { get; set; }
+        public DbSet<User> UserDB { get; set; }
     }
 }

@@ -3,29 +3,12 @@ using System.Security.Cryptography;
 
 namespace netChat.Classes;
 
-class Room
+public class Room
 {
     //Variables
-    private int max_users = 2;
-    public int maxUsers
-    {
-        get { return max_users; }
-        set { max_users = value; }
-    }
-
-    private int cur_users = 0;
-    public int curUsers
-    {
-        get { return cur_users; }
-        set { cur_users = value; }
-    }
-
-    private string room_code = "";
-    public string roomCode
-    {
-        get { return roomCode; }
-        set { roomCode = value; }
-    }
+    public int maxUsers { get; set; }
+    public int curUsers { get; set; }
+    public string roomCode { get; set; }
 
     Queue<(User, string)> messages = new Queue<(User, string)>();
     List<User> users = new List<User>();
@@ -57,8 +40,8 @@ class Room
     //Called when a user connects to the room
     void addUser(User user)
     {
-        ++cur_users;
-        user.userID = cur_users;
+        ++curUsers;
+        user.userID = curUsers;
         users.Add(user);
     }
 
@@ -66,7 +49,7 @@ class Room
     void removeUser(User user)
     {
         users.Remove(user);
-        --cur_users;
+        --curUsers;
     }
 
     //Called when a user inputs text into the message box
@@ -99,7 +82,7 @@ class Room
         }
         else
         {
-            room_code = random;
+            roomCode = random;
         }
     }
 }
