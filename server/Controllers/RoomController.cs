@@ -4,7 +4,7 @@ using netChat.Classes;
 namespace netChat.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class RoomController : ControllerBase
 {
     private static List<Room> rooms = new List<Room>();

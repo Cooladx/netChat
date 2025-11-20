@@ -4,7 +4,7 @@ using netChat.Classes;
 namespace netChat.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class UserController : ControllerBase
 {
     private static List<User> users = new List<User>();
@@ -12,8 +12,7 @@ public class UserController : ControllerBase
     [HttpPost]
     public IActionResult AddUser(string username, string password)
     {
-        User newUser = new User(username);
-        newUser.Password = password;
+        User newUser = new User(username, password);
         users.Add(newUser);
         return CreatedAtAction("placeholder", new { code = newUser.Username }, newUser);
     }

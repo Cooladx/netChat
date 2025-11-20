@@ -54,7 +54,6 @@ app.UseCors();
 // Links url with endpoint hub for websocket.
 app.MapHub<netChat.Hubs.ChatHub>("/hub");
 
-
 // Starts application and only stops till it's shut down manually.
 app.Run();
 
