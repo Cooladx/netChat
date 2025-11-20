@@ -30,6 +30,9 @@ var sql_client_builder = new NpgsqlConnectionStringBuilder
 
 builder.Services.AddDbContext<NetChatDBContext>(options => options.UseNpgsql(sql_client_builder.ConnectionString));
 
+builder.Services.AddMvc();
+builder.Services.AddControllers();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
@@ -42,6 +45,7 @@ builder.Services.AddCors(options =>
         });
 });
 
+
 // Builds web app
 var app = builder.Build();
 
@@ -53,6 +57,7 @@ app.UseStaticFiles();
 app.UseCors();
 // Links url with endpoint hub for websocket.
 app.MapHub<netChat.Hubs.ChatHub>("/hub");
+app.MapControllers();
 
 // Starts application and only stops till it's shut down manually.
 app.Run();
@@ -65,6 +70,8 @@ namespace netChat
     [JsonSerializable(typeof(long))]
     [JsonSerializable(typeof(int))]
     [JsonSerializable(typeof(bool))]
+    [JsonSerializable(typeof(User))]
+    [JsonSerializable(typeof(Room))]
     public partial class NetChatContext : JsonSerializerContext { }
 
     public class NetChatDBContext(DbContextOptions options) : DbContext(options)

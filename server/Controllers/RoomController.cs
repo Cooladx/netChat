@@ -4,13 +4,13 @@ using netChat.Classes;
 namespace netChat.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[Controller]")]
 public class RoomController : ControllerBase
 {
     private static List<Room> rooms = new List<Room>();
 
-    [HttpPost("{username}")]
-    public IActionResult CreateRoom(string username)
+    [HttpPost]
+    public IActionResult CreateRoom([FromBody] string username)
     {
         User creator = new User(username);
         Room newRoom = new Room();
@@ -19,7 +19,7 @@ public class RoomController : ControllerBase
         return CreatedAtAction("placeholder", new { code = newRoom.roomCode }, newRoom);
     }
 
-    [HttpDelete("{code}")]
+    [HttpDelete]
     public IActionResult DeleteRoom(string code)
     {
         Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
@@ -42,7 +42,7 @@ public class RoomController : ControllerBase
         return Ok(rooms);
     }
 
-    [HttpGet("{code}")]
+    [HttpGet]
     public IActionResult GetRoom(string code)
     {
         Room? room = rooms.FirstOrDefault(r => r.roomCode == code);

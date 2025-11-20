@@ -4,20 +4,21 @@ using netChat.Classes;
 namespace netChat.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[Controller]")]
 public class UserController : ControllerBase
 {
     private static List<User> users = new List<User>();
 
     [HttpPost]
-    public IActionResult AddUser(string username, string password)
+    public IActionResult AddUser([FromBody] string username, string password)
     {
+        Console.WriteLine($"Attempting to add user: {username}");
         User newUser = new User(username, password);
         users.Add(newUser);
         return CreatedAtAction("placeholder", new { code = newUser.Username }, newUser);
     }
 
-    [HttpDelete("{username}")]
+    [HttpDelete]
     public IActionResult GetRoom(string username, string password)
     {
         User? user = users.FirstOrDefault(u => u.Username == username);
@@ -43,7 +44,7 @@ public class UserController : ControllerBase
         return Ok(users);
     }
 
-    [HttpGet("{username}")]
+    [HttpGet]
     public IActionResult GetUser(string username, string password)
     {
         User? user = users.FirstOrDefault(u => u.Username == username);
