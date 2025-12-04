@@ -76,6 +76,7 @@ namespace netChat
 
     public class NetChatDBContext(DbContextOptions options) : DbContext(options)
     {
-        public DbSet<User> UserDB { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Room> Rooms { get; set; }
     }
 }

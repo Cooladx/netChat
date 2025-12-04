@@ -5,23 +5,23 @@ namespace netChat.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class UserController : ControllerBase
+public class UserController(NetChatDBContext context) : ControllerBase
 {
-    private static List<User> users = new List<User>();
+    private readonly NetChatDBContext context = context;
 
     [HttpPost]
     public IActionResult AddUser([FromBody] string username, string password)
     {
         Console.WriteLine($"Attempting to add user: {username}");
-        User newUser = new User(username, password);
-        users.Add(newUser);
+        User newUser = new(username, password);
+        context.Users.Add(newUser);
         return CreatedAtAction("placeholder", new { code = newUser.Username }, newUser);
     }
 
     [HttpDelete]
     public IActionResult GetRoom(string username, string password)
     {
-        User? user = users.FirstOrDefault(u => u.Username == username);
+        User? user = context.Users.FirstOrDefault(u => u.Username == username);
         if (user == null)
         {
             return NotFound();
@@ -30,24 +30,24 @@ public class UserController : ControllerBase
         {
             return Unauthorized();
         }
-        users.Remove(user);
+        context.Users.Remove(user);
         return NoContent();
     }
 
     [HttpGet]
     public IActionResult GetUsers()
     {
-        foreach (var user in users)
+        foreach (var user in context.Users)
         {
             // Potentially update users' status here if needed
         }
-        return Ok(users);
+        return Ok(context.Users);
     }
 
     [HttpGet]
     public IActionResult GetUser(string username, string password)
     {
-        User? user = users.FirstOrDefault(u => u.Username == username);
+        User? user = context.Users.Where(u => u.Username == username).First();
         if (user == null)
         {
             return NotFound();

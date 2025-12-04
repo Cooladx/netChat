@@ -5,16 +5,16 @@ namespace netChat.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class RoomController : ControllerBase
+public class RoomController(NetChatDBContext context) : ControllerBase
 {
-    private static List<Room> rooms = new List<Room>();
+    private readonly NetChatDBContext context = context;
 
     [HttpPost]
     public IActionResult CreateRoom([FromBody] string username)
     {
-        User creator = new User(username);
-        Room newRoom = new Room();
-        rooms.Add(newRoom);
+        User creator = context.Users.Where(u => u.Username == username).First();
+        Room newRoom = new();
+        context.Rooms.Add(newRoom);
         newRoom.startup(creator);
         return CreatedAtAction("placeholder", new { code = newRoom.roomCode }, newRoom);
     }
@@ -22,12 +22,12 @@ public class RoomController : ControllerBase
     [HttpDelete]
     public IActionResult DeleteRoom(string code)
     {
-        Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
+        Room? room = context.Rooms.Where(r => r.roomCode == code).First();
         if (room == null)
         {
             return NotFound();
         }
-        rooms.Remove(room);
+        context.Rooms.Remove(room);
         room.shutdown();
         return NoContent();
     }
@@ -35,17 +35,17 @@ public class RoomController : ControllerBase
     [HttpGet]
     public IActionResult GetRooms()
     {
-        foreach (var room in rooms)
+        foreach (var room in context.Rooms)
         {
             // Potentially update room status here if needed
         }
-        return Ok(rooms);
+        return Ok(context.Rooms);
     }
 
     [HttpGet]
     public IActionResult GetRoom(string code)
     {
-        Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
+        Room? room = context.Rooms.Where(r => r.roomCode == code).First();
         if (room == null)
         {
             return NotFound();
