@@ -34,15 +34,21 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         builder =>
         {
-            builder.WithOrigins("http://127.0.0.1:5173")
+            builder.WithOrigins("http://localhost:5173")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
         });
 });
 
+
+builder.Services.AddControllers();
+
+
 // Builds web app
 var app = builder.Build();
+
+app.MapControllers();
 
 // Allows server to locate and serve index.html
 app.UseDefaultFiles();
@@ -72,14 +78,14 @@ namespace netChat
         public DbSet<User> Users { get; set; }
     }
     
-    public class User(string UserId)
-    {
-        public User(string UserId, string Username): this(UserId)
-        {
-            this.Username = Username;
-        }
+    // public class User(string UserId)
+    // {
+    //     public User(string UserId, string Username): this(UserId)
+    //     {
+    //         this.Username = Username;
+    //     }
 
-        public required string UserID { get; set; } = UserId;
-        public string? Username { get; set; }
-    }
+    //     public required string UserID { get; set; } = UserId;
+    //     public string? Username { get; set; }
+    // }
 }
