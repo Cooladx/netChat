@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using netChat.Classes;
+using netChat;
 
 namespace netChat.Controllers;
 
@@ -10,14 +10,14 @@ public class UserController : ControllerBase
     private static List<User> users = new List<User>();
 
     [HttpPost]
-    private IActionResult AddUser(User user)
+    public IActionResult AddUser(User user)
     {
         users.Add(user);
-        return CreatedAtAction("placeholder", new { code = user.userName }, user);
+        return CreatedAtAction(nameof(GetUser), new { code = user.userName }, user);
     }
 
     [HttpDelete("{username}")]
-    private IActionResult GetRoom(string username)
+    public IActionResult DeleteUser(string username)
     {
         User? user = users.FirstOrDefault(u => u.userName == username);
         if (user == null)
@@ -29,7 +29,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    private IActionResult GetUsers()
+    public IActionResult GetUsers()
     {
         foreach (var user in users)
         {
@@ -39,7 +39,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("{username}")]
-    private IActionResult GetUser(string username)
+    public IActionResult GetUser(string username)
     {
         User? user = users.FirstOrDefault(u => u.userName == username);
         if (user == null)

@@ -1,55 +1,53 @@
 using Microsoft.AspNetCore.Mvc;
-using netChat.Classes;
+using netChat;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace netChat.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class RoomController : ControllerBase
+namespace netChat.Controllers
 {
-    private static List<Room> rooms = new List<Room>();
-
-    [HttpPost("{username}")]
-    private IActionResult CreateRoom(string username)
+    [ApiController]
+    [Route("[controller]")]
+    public class RoomController : ControllerBase
     {
-        User creator = new User(username);
-        Room newRoom = new Room();
-        rooms.Add(newRoom);
-        newRoom.startup(creator);
-        return CreatedAtAction("placeholder", new { code = newRoom.roomCode }, newRoom);
-    }
+        private static List<Room> rooms = new List<Room>();
 
-    [HttpDelete("{code}")]
-    private IActionResult DeleteRoom(string code)
-    {
-        Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
-        if (room == null)
+        [HttpPost("{username}")]
+        public IActionResult CreateRoom(string username)
         {
-            return NotFound();
-        }
-        rooms.Remove(room);
-        room.shutdown();
-        return NoContent();
-    }
+            User creator = new User(username);
+            Room newRoom = new Room(creator);  
+            rooms.Add(newRoom);
 
-    [HttpGet]
-    private IActionResult GetRooms()
-    {
-        foreach (var room in rooms)
-        {
-            // Potentially update room status here if needed
+            return CreatedAtAction(nameof(GetRoom), new { code = newRoom.roomCode }, newRoom);
         }
-        return Ok(rooms);
-    }
 
-    [HttpGet("{code}")]
-    private IActionResult GetRoom(string code)
-    {
-        Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
-        if (room == null)
+        [HttpDelete("{code}")]
+        public IActionResult DeleteRoom(string code)
         {
-            return NotFound();
+            Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
+            if (room == null)
+                return NotFound();
+
+            rooms.Remove(room);
+            room.Shutdown();
+
+            return NoContent();
         }
-        return Ok(room);
+
+        [HttpGet]
+        public IActionResult GetRooms()
+        {
+            return Ok(rooms);
+        }
+
+        [HttpGet("{code}")]
+        public IActionResult GetRoom(string code)
+        {
+            Room? room = rooms.FirstOrDefault(r => r.roomCode == code);
+            if (room == null)
+                return NotFound();
+
+            return Ok(room);
+        }
     }
 }
