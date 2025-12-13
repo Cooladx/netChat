@@ -21,7 +21,7 @@ export default function SocketButton({
     }
     // Create socket connection to give client unique id.
     const socketConnection = new signalR.HubConnectionBuilder()
-      .withUrl("http://localhost:5019/hub")
+      .withUrl("http://127.0.0.1:5019/hub")
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
@@ -38,13 +38,13 @@ export default function SocketButton({
 
       // Add listener so that when server gets the string of user and message, the client should recieve this information in the
       // box below: MESSAGES RECIEVED.
-      socketConnection.on("ReceiveMessage", (user, message) => {
-        console.log(`Received: ${user} - ${message}`);
-        const li = document.createElement("li");
-        li.className = "msg-element";
-        li.textContent = `${user}: ${message}`;
-        document.getElementById("msgList")?.appendChild(li);
-      });
+//      socketConnection.on("ReceiveMessage", (user, message) => {
+//        console.log(`Received: ${user} - ${message}`);
+//        const li = document.createElement("li");
+//        li.className = "msg-element";
+//        li.textContent = `${user}: ${message}`;
+//        document.getElementById("msgList")?.appendChild(li);
+//      });
 
       console.log(socketConnection);
     } catch (err) {
