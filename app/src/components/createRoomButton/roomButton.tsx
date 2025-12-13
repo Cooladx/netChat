@@ -1,38 +1,49 @@
+// src/components/createRoomButton/roomButton.tsx
 import "./style.css";
-import * as signalR from "@microsoft/signalr";
 import { HubConnection } from "@microsoft/signalr";
-export default function MessageButton({
+import type { Room } from "../../types/Room";
+
+export default function RoomButton({
   buttonText,
-  id,
   connection,
-  username,
-  message,
+  onRoomCreated,
+  currentUserId,
 }: {
   buttonText: string;
-  id: string;
   connection: HubConnection | null;
-  username: string;
-  message: string;
+  onRoomCreated: (room: Room) => void;
+  currentUserId: string;
 }) {
+  console.log("RoomButton received currentUserId:", currentUserId);
   async function handleClick() {
-    // console.log(username);
-    // console.log(message);
-    try {
-      if (connection != null) {
-        
+    const roomName = prompt("Enter room name:");
+    if (!roomName?.trim()) return;
 
-        
-      }
-    } catch (err) {
-      console.error(err);
+    const res = await fetch("http://localhost:5019/Room", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ roomName, creatorId: currentUserId }),
+    });
+
+    if (!res.ok) {
+      alert("Failed to create room");
+      return;
     }
+
+    const data = await res.json();
+
+    const newRoom: Room = {
+      id: data.id,
+      name: data.name,
+      roomCode: data.roomCode,
+    };
+
+    onRoomCreated(newRoom);
   }
 
   return (
-    <>
-      <button type="button" id={id} onClick={handleClick}>
-        {buttonText}
-      </button>
-    </>
+    <button className="msg-btn" onClick={handleClick}>
+      {buttonText}
+    </button>
   );
 }
