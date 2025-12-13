@@ -23,8 +23,8 @@ var sql_client_builder = new NpgsqlConnectionStringBuilder
 {
     Host = "127.0.0.1:5432",
     Username = "postgres",
-    Password = "<password>",
-    Database = "netChatDB"
+    Password = "password",
+    Database = "netchatdb"
 };
 
 builder.Services.AddDbContext<NetChatDBContext>(options => options.UseNpgsql(sql_client_builder.ConnectionString));
@@ -73,19 +73,5 @@ namespace netChat
     [JsonSerializable(typeof(bool))]
     public partial class NetChatContext : JsonSerializerContext { }
 
-    public class NetChatDBContext(DbContextOptions options) : DbContext(options)
-    {
-        public DbSet<User> Users { get; set; }
-    }
     
-    // public class User(string UserId)
-    // {
-    //     public User(string UserId, string Username): this(UserId)
-    //     {
-    //         this.Username = Username;
-    //     }
-
-    //     public required string UserID { get; set; } = UserId;
-    //     public string? Username { get; set; }
-    // }
 }
