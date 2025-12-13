@@ -1,37 +1,22 @@
-using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace netChat
 {
+    [Table("users")]
     public class User
     {
-        private int user_id = -1;
-        public int userID
-        {
-            get { return user_id; }
-            set { user_id = value; }
-        }
+        [Key]
+        [Column("userid")]
+        public string UserId { get; set; } = "";
 
-        private string username = "User";
-        public string userName
-        {
-            get { return username; }
-            set { username = value; }
-        }
+        [Column("username")]
+        public string UserName { get; set; } = "";
 
-        // Empty constructor
-        public User() { }
+        [Column("password")]
+        public string Password { get; set; } = "";
 
-        // Constructor with username
-        public User(string username)
-        {
-            this.username = username;
-        }
-
-        // Constructor with id + username
-        public User(int user_id, string username)
-        {
-            this.user_id = user_id;
-            this.username = username;
-        }
+        [Column("rkey")]
+        public string RKey { get; set; } = "";
     }
 }
