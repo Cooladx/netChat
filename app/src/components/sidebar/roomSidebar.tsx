@@ -1,32 +1,23 @@
+// src/components/chat/roomSidebar.tsx
+import type { Room } from "../../types/Room";
 
-// src/components/sidebar/roomSidebar.tsx
-
-
-// Expected data for Rooms
-type Room = {
-  id: string;
-  name: string;
-};
-
-
-// A side bar that has rooms. Should have an id of the room and be clickable to go inside the room. 
-export default function RoomSidebar({
-  rooms = [],
-  onSelect = () => {},
-}: {
+interface RoomSidebarProps {
   rooms?: Room[];
   onSelect?: (id: string) => void;
-}) {
+}
+
+export default function RoomSidebar({ rooms = [], onSelect }: RoomSidebarProps) {
   return (
-    <aside>
-      <h2>Rooms</h2>
+    <div className="room-sidebar">
+      <h3>Rooms</h3>
+      {rooms.length === 0 && <p>No rooms yet</p>}
       <ul>
-        {rooms.map((r) => (
-          <li key={r.id}>
-            <button onClick={() => onSelect(r.id)}>{r.name}</button>
+        {rooms.map((room) => (
+          <li key={room.id}>
+            <button onClick={() => onSelect?.(room.id)}>{room.name}</button>
           </li>
         ))}
       </ul>
-    </aside>
+    </div>
   );
 }
