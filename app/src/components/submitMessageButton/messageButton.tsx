@@ -9,12 +9,14 @@ export default function MessageButton({
   connection,
   username,
   message,
+  roomId,
 }: {
   buttonText: string;
   id: string;
   connection: HubConnection | null;
   username: string;
   message: string;
+  roomId: string;
 }) {
   // Function to run when client clicks send message button.
   // it will run a method from the hubs class in the asp.net core backend.
@@ -23,7 +25,7 @@ export default function MessageButton({
     try {
       if (connection != null) {
         console.log("Sending to server:", username, message);
-        await connection.invoke("SendMessage", username, message);
+        await connection.invoke("SendMessage", roomId, username, message);
       }
     } catch (err) {
       console.error(err);

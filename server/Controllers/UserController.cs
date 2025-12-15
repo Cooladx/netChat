@@ -1,52 +1,98 @@
 using Microsoft.AspNetCore.Mvc;
-using netChat.Classes;
+using Microsoft.EntityFrameworkCore;
+using netChat;
 
-namespace netChat.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class UserController : ControllerBase
+namespace netChat.Controllers
 {
-    private static List<User> users = new List<User>();
-
-    [HttpPost]
-    private IActionResult AddUser(User user)
+    [ApiController]
+    [Route("[controller]")]
+    public class UserController : ControllerBase
     {
-        users.Add(user);
-        return CreatedAtAction("placeholder", new { code = user.userName }, user);
-    }
+        private readonly NetChatDBContext _context;
 
-    [HttpDelete("{username}")]
-    private IActionResult GetRoom(string username)
-    {
-        User? user = users.FirstOrDefault(u => u.userName == username);
-        if (user == null)
+        public UserController(NetChatDBContext context)
         {
-            return NotFound();
+            _context = context;
         }
-        users.Remove(user);
-        return NoContent();
-    }
 
-    [HttpGet]
-    private IActionResult GetUsers()
-    {
-        foreach (var user in users)
+        // GET all users
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
         {
-            // Potentially update users' status here if needed
+            var users = await _context.Users.ToListAsync();
+            return Ok(users);
         }
-        return Ok(users);
-    }
 
-    [HttpGet("{username}")]
-    private IActionResult GetUser(string username)
-    {
-        User? user = users.FirstOrDefault(u => u.userName == username);
-        if (user == null)
+        // GET a single user by userid
+        [HttpGet("{userid}")]
+        public async Task<IActionResult> GetUser(string userid)
         {
-            return NotFound();
+            var user = await _context.Users.FindAsync(userid);
+            if (user == null)
+                return NotFound();
+            return Ok(user);
         }
-        return Ok(user);
+
+        // POST: create a user
+        [HttpPost]
+        public async Task<IActionResult> CreateUser([FromBody] User user)
+        {
+            // Assign unique ID if not provided
+            if (string.IsNullOrEmpty(user.UserId))
+                user.UserId = Guid.NewGuid().ToString();
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetUser), new { userid = user.UserId }, user);
+        }
+
+        // DELETE a user by userid
+        [HttpDelete("{userid}")]
+        public async Task<IActionResult> DeleteUser(string userid)
+        {
+            var user = await _context.Users.FindAsync(userid);
+            if (user == null)
+                return NotFound();
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // Sign up endpoint
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] User newUser)
+        {
+            // Optional: check if username already exists
+            if (await _context.Users.AnyAsync(u => u.UserName == newUser.UserName))
+                return BadRequest(new { message = "Username already exists" });
+
+            // Generate unique userId
+            newUser.UserId = Guid.NewGuid().ToString().Substring(0, 6);
+
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { userId = newUser.UserId, username = newUser.UserName });
+        }
+
+        // Login in endpoint for the login page
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] User loginUser)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.UserName == loginUser.UserName
+                                       && u.Password == loginUser.Password);
+
+            if (user == null)
+                return Unauthorized(new { message = "Invalid username or password" });
+            Console.WriteLine($"Login attempt: {loginUser.UserName} / {loginUser.Password}");
+
+            return Ok(new { userId = user.UserId, username = user.UserName });
+        }
+
     }
 
 }

@@ -1,3 +1,5 @@
+// src/components/inputBox/input.tsx
+
 import "./style.css";
 
 /* 

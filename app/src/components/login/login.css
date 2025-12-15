@@ -1,0 +1,62 @@
+/* Make the whole page center the login box */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The login box container */
+.login-box {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.login-box input {
+    margin: 0.5rem 0;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.login-box button {
+    margin-top: 1rem;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.login-box button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
+}
+
+.login-box button:active {
+    color: red;
+    transform: scale(0.95);
+    /* press down */
+}
+
+.login-box input {
+    box-sizing: border-box;
+}
+
+h2 {
+    color: black
+}
+
+.loginLabel {
+    color: black;
+}

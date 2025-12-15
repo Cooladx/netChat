@@ -1,5 +1,10 @@
-#docker run -e POSTGRES_PASSWORD=password postgres-db -it  --name postgres_db  -d postgres
+#!/bin/bash
 
 
-
-docker run -d  --name postgres-db -e POSTGRES_PASSWORD=password --mount type=bind,src=../../database,target=/var/lib/postgresql/data postgres
+# Run a fresh Postgres container
+docker run -d \
+  --name postgres-db \
+  -e POSTGRES_PASSWORD=password \
+  -v netchat-postgres-data:/var/lib/postgresql \
+  -p 5432:5432 \
+  postgres:latest
